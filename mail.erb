@@ -1,0 +1,37 @@
+
+Amazon Linuxにて、以下のパッチが出ています。
+
+<%- severity = nil -%>
+<%- datas.each do |data| -%>
+  <%- if data[:severity_jp] != severity -%>
+  <%- severity = data[:severity_jp] -%>
+【<%=severity %>】
+  <%- end -%>
+  <%- if data[:alass].size ==0 -%>
+
+　該当なし
+--------------------------------------------------------------------
+  <%- end -%>
+  <%- data[:alass].each do |alas| -%>
+
+--------------------------------------------------------------------
+  ALAS_CODE：<%=alas[:alas_code] %>
+  概要：
+<%=alas[:issue_overview_jp] %>
+  対応内容：
+<%=alas[:issue_correction_jp] %>
+  日付：<%=alas[:pubdate] %>
+
+  影響パッケージ：
+    <%- alas[:packages].each do |package| -%>
+      <%=package %>
+    <%- end -%>
+  CVE:
+    <%- alas[:cves].each do |cve| -%>
+      <%=cve[:cve_code] %>
+<%=cve[:cve_details_jp] %>
+    <%- end -%>
+  <%- end -%>
+<%- end -%>
+
+
